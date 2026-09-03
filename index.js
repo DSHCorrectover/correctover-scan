@@ -13,7 +13,7 @@ const { runScan, parseConfig, KNOWN_CONFIG_PATHS } = require('./core/scanner');
 const { runBundleScan, discoverBundleFiles } = require('./core/bundle-scanner');
 const { recordCall, getUpgradeMessage } = require('./core/license');
 
-const VERSION = '1.4.0';
+const VERSION = '1.6.0';
 const PRODUCT = 'correctover-scan';
 const JS_EXT = new Set(['.js', '.mjs', '.cjs', '.ts']);
 
