@@ -1,5 +1,8 @@
 # correctover-scan
 
+
+[![Rekor anchored](https://img.shields.io/badge/Rekor%20anchored-logIndex%202697131671-1455A3)](https://search.sigstore.dev/?logIndex=2697131671)
+
 > Security scanner for MCP servers and AI agents — detects credential exposure, SSRF, command injection risk and missing auth across your MCP configuration. 14 checks mapped to OWASP AISVS 1.0. Run anywhere with `npx correctover-scan`.
 
 ![npm](https://img.shields.io/npm/v/correctover-scan)
