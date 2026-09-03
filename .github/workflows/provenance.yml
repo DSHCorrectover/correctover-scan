@@ -1,0 +1,37 @@
+name: code-birth-certificate
+
+# Anchors this repository snapshot in the public Sigstore Rekor
+# transparency log (evidence of existence and timestamp). Rekor-only:
+# no tokens, no accounts required.
+#
+# Code Birth Certificate: https://github.com/DSHCorrectover/code-birth-certificate
+# Pinned to @main for the first release; switch to @v1 after the action
+# is tagged v1.x.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  provenance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Code Birth Certificate (Sigstore Rekor anchor)
+        id: cbc
+        uses: DSHCorrectover/code-birth-certificate@main
+        with:
+          name: correctover-scan
+          # Rekor only - no zenodo-token, no credentials needed.
+
+      - name: Report anchor
+        run: |
+          echo "Code Birth Certificate for correctover-scan:"
+          echo "  manifest digest : ${{ steps.cbc.outputs.manifest-digest }}"
+          echo "  Rekor log index : ${{ steps.cbc.outputs.rekor-log-index }}"
+          echo "  Rekor URL       : ${{ steps.cbc.outputs.rekor-url }}"
