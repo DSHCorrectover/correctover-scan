@@ -1,0 +1,66 @@
+{
+  "name": "correctover-scan",
+  "version": "1.4.0",
+  "description": "Correctover Security Scanner — CCS audit for MCP configurations AND published JS bundles/npm packages. Detects hardcoded secrets, RCE, SSRF, credential hijacking against OWASP AISVS 1.0.",
+  "main": "index.js",
+  "bin": {
+    "correctover-scan": "./index.js"
+  },
+  "scripts": {
+    "test": "node test.js",
+    "prepublishOnly": "node test.js"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-security",
+    "agent-security",
+    "ai-security",
+    "runtime-security",
+    "security",
+    "scanner",
+    "owasp",
+    "aisvs",
+    "owasp-aisvs",
+    "ccs",
+    "correctover",
+    "vulnerability-scanner",
+    "rce-detection",
+    "ssrf-detection",
+    "credential-hijacking",
+    "self-healing",
+    "audit",
+    "guardrail",
+    "claude",
+    "cursor",
+    "model-context-protocol",
+    "security-scanner",
+    "ai-agents",
+    "llm",
+    "llm-security",
+    "devsecops",
+    "cli",
+    "prompt-injection",
+    "command-injection",
+    "ssrf"
+  ],
+  "author": "Correctover",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DSHCorrectover/correctover-scan"
+  },
+  "homepage": "https://correctover.com/scan",
+  "bugs": {
+    "url": "https://github.com/DSHCorrectover/correctover-scan/issues"
+  },
+  "files": [
+    "index.js",
+    "core/scanner.js",
+    "core/bundle-scanner.js",
+    "core/license.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
