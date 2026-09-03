@@ -4,7 +4,7 @@
   "description": "Correctover Security Scanner — CCS audit for MCP configurations AND published JS bundles/npm packages. Detects hardcoded secrets, RCE, SSRF, credential hijacking against OWASP AISVS 1.0.",
   "main": "index.js",
   "bin": {
-    "correctover-scan": "./index.js"
+    "correctover-scan": "index.js"
   },
   "scripts": {
     "test": "node test.js",
@@ -47,7 +47,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DSHCorrectover/correctover-scan"
+    "url": "git+https://github.com/DSHCorrectover/correctover-scan.git"
   },
   "homepage": "https://correctover.com/scan",
   "bugs": {
