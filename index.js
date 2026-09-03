@@ -14,7 +14,7 @@ const { runBundleScan, discoverBundleFiles } = require('./core/bundle-scanner');
 const { recordCall, getUpgradeMessage } = require('./core/license');
 const { formatHTMLReport, normalizeConfigFindings, normalizeBundleFindings, failHint } = require('./core/report');
 
-const VERSION = '1.7.0';
+const VERSION = '1.7.1';
 const PRODUCT = 'correctover-scan';
 const JS_EXT = new Set(['.js', '.mjs', '.cjs', '.ts']);
 
