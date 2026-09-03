@@ -57,6 +57,7 @@
     "index.js",
     "core/scanner.js",
     "core/bundle-scanner.js",
+    "core/report.js",
     "core/license.js",
     "README.md"
   ],
