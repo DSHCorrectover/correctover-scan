@@ -12,8 +12,9 @@ const path = require('path');
 const { runScan, parseConfig, KNOWN_CONFIG_PATHS } = require('./core/scanner');
 const { runBundleScan, discoverBundleFiles } = require('./core/bundle-scanner');
 const { recordCall, getUpgradeMessage } = require('./core/license');
+const { formatHTMLReport, normalizeConfigFindings, normalizeBundleFindings, failHint } = require('./core/report');
 
-const VERSION = '1.6.0';
+const VERSION = '1.7.0';
 const PRODUCT = 'correctover-scan';
 const JS_EXT = new Set(['.js', '.mjs', '.cjs', '.ts']);
 
@@ -291,6 +292,20 @@ function formatJSON(results, stats, filename) {
   return JSON.stringify({ scanner: 'correctover-scan', version: VERSION, file: filename, stats, results }, null, 2);
 }
 
+/* ------------------------------------------------------------------ */
+/* HTML shareable report (verification-as-acquisition funnel)          */
+/* ------------------------------------------------------------------ */
+
+function defaultReportPath() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const base = `correctover-scan-report-${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}`;
+  let p = path.join(process.cwd(), `${base}.html`);
+  let n = 2;
+  while (fs.existsSync(p)) p = path.join(process.cwd(), `${base}-${n++}.html`);
+  return p;
+}
+
 function runBundleMode(target, format, outFile) {
   // All diagnostics/banners go to stderr so that stdout carries only the
   // machine-readable payload for json/sarif consumers.
@@ -335,10 +350,23 @@ function runBundleMode(target, format, outFile) {
   const label = path.relative(process.cwd(), abs) || abs;
 
   let payload;
+  let htmlDefault = false;
   if (format === 'json') {
     payload = formatBundleJSON(bundle, label);
   } else if (format === 'sarif') {
     payload = JSON.stringify(formatBundleSARIF(bundle, label), null, 2);
+  } else if (format === 'html') {
+    const labelCounts = {
+      pass: bundle.stats.pass, warn: bundle.stats.warn, fail: bundle.stats.fail, info: bundle.stats.info,
+      score: bundle.stats.score,
+    };
+    payload = formatHTMLReport({
+      mode: 'bundle/code scan', target: label,
+      items: normalizeBundleFindings(bundle), totals: labelCounts,
+      checksLabel: '12 automatic + 5 semi-automatic code-layer checks',
+      version: VERSION,
+    });
+    if (!outFile) { outFile = defaultReportPath(); htmlDefault = true; }
   } else {
     payload = formatBundleResults(bundle, label);
   }
@@ -346,6 +374,9 @@ function runBundleMode(target, format, outFile) {
     try {
       fs.writeFileSync(outFile, payload + '\n');
       diag(`${c.green}✅ Report written to ${outFile}${c.reset}`);
+      if (htmlDefault) {
+        diag(`${c.dim}Shareable HTML report — forward it to your team. ${failHint(bundle.stats.findings.fail)}${c.reset}`);
+      }
     } catch (e) {
       console.error(`${c.red}Error writing output file: ${e.message}${c.reset}`);
       process.exit(1);
@@ -391,7 +422,9 @@ Bundle / published-package code mode (v1.4.0+):
 
 Options:
   --bundle <path>       Explicitly run bundle/code scan on a JS file or directory
-  -f, --format <type>   Output format: text, json, sarif (default: text)
+  -f, --format <type>   Output format: text, json, sarif, html (default: text)
+                        html writes a self-contained shareable report file
+                        (correctover-scan-report-<date>.html if no -o given)
   -d, --dir <path>      Directory to scan for MCP configs (default: cwd)
   -r, --recursive       Recursively find MCP config files
   -o, --output <file>   Write the report to a file (text/json/sarif) instead of stdout
@@ -545,14 +578,27 @@ Examples:
     }
   }
 
-  // JSON/SARIF output
+  // JSON/SARIF/HTML output
   let machinePayload = null;
+  let htmlDefault = false;
   if (format === 'json') {
     const output = allResults.map(r => formatJSON(r.results, r.stats, r.file));
     machinePayload = output.join('\n');
   } else if (format === 'sarif') {
     const sarifResults = allResults.map(r => formatSARIF(r.results, r.file));
     machinePayload = JSON.stringify(sarifResults.length === 1 ? sarifResults[0] : { runs: sarifResults.flatMap(s => s.runs) }, null, 2);
+  } else if (format === 'html') {
+    const totals = { pass: totalPass, warn: totalWarn, fail: totalFail, info: totalInfo };
+    const denom = (totalPass + totalWarn + totalFail + totalInfo) * 10;
+    totals.score = denom === 0 ? 100 : Math.round(((totalPass * 10 + totalWarn * 5 + totalInfo * 7) / denom) * 100);
+    machinePayload = formatHTMLReport({
+      mode: 'MCP config scan',
+      target: filesToScan.length === 1 ? path.relative(process.cwd(), filesToScan[0]) || filesToScan[0] : `${filesToScan.length} config file(s)`,
+      items: normalizeConfigFindings(allResults), totals,
+      checksLabel: '14 config checks mapped to OWASP AISVS 1.0',
+      version: VERSION,
+    });
+    if (!outFile) { outFile = defaultReportPath(); htmlDefault = true; }
   }
 
   // Summary
@@ -570,6 +616,9 @@ Examples:
     try {
       fs.writeFileSync(outFile, payload + '\n');
       diag(`${c.green}✅ Report written to ${outFile}${c.reset}`);
+      if (htmlDefault) {
+        diag(`${c.dim}Shareable HTML report — forward it to your team. ${failHint(totalFail)}${c.reset}`);
+      }
     } catch (e) {
       console.error(`${c.red}Error writing output file: ${e.message}${c.reset}`);
       process.exit(1);
