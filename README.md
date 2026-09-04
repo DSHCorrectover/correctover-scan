@@ -159,7 +159,7 @@ The free-tier daily scan allowance applies to bundle scans too (counted the same
 
 ### Web Scanner
 
-Try the no-install browser version (files never leave your machine): [in-browser scanner](https://dshcorrectover.github.io/agent-audit/scan.html)
+Try the no-install browser version (files never leave your machine): [in-browser scanner](https://correctover.com/scan.html)
 
 ## Standards Compliance
 
@@ -184,7 +184,7 @@ For first customers, if the manual audit finds no critical-severity issue, you p
 
 - [correctover.com](https://correctover.com) — AI Agent Runtime Assurance
 - [CCS Standard](https://correctover.com/ccs) — Conformance Specification
-- [Web Scanner](https://dshcorrectover.github.io/agent-audit/scan.html) — In-browser version, no upload
+- [Web Scanner](https://correctover.com/scan.html) — In-browser version, no upload
 - [GitHub](https://github.com/DSHCorrectover) — Source code
 - [Conformance test vectors](https://github.com/DSHCorrectover/ccs-conformance-vectors) — 66 signed, reproducible
 - [EMILIA interoperability](https://github.com/emiliaprotocol/emilia-protocol/pull/693) — merged joint assessment
@@ -197,7 +197,11 @@ CCS (Correctover Conformance Shape) is published as an individual Internet-Draft
 
 An Internet-Draft is an individual submission. It is not an RFC, an adopted working-group item, or IETF endorsement; the Datatracker page is authoritative for revision and status.
 
-## License
+## License & scope
 
-MIT © Correctover
+MIT © Correctover.
+
+This CLI is a **free, open-source lead-generation tool** (MIT-licensed): use it in your terminal, CI, and agent hooks (such as the [Kimi Code security hook](https://github.com/DSHCorrectover/kimi-code-security-hook)), fork it, and redistribute it under the MIT terms. External pull requests are welcome.
+
+The commercial products — the hosted zero-upload scan platform, the CCS runtime verification engine, and the manual Agent Output Audit service — are proprietary and are not part of this open-source release. See [correctover.com](https://correctover.com) for those.
 
