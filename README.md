@@ -159,7 +159,7 @@ The free-tier daily scan allowance applies to bundle scans too (counted the same
 
 ### Web Scanner
 
-Try the online version: [correctover.com/scan](https://correctover.com/scan/)
+Try the no-install browser version (files never leave your machine): [in-browser scanner](https://dshcorrectover.github.io/agent-audit/scan.html)
 
 ## Standards Compliance
 
@@ -177,14 +177,14 @@ The free automated scan covers surface-level configuration checks. A manual Corr
 
 For first customers, if the manual audit finds no critical-severity issue, you pay nothing.
 
-- Get your free 1-page summary: email [234114134@coze.email](mailto:234114134@coze.email?subject=Free%20audit%20scan%20summary)
+- Get your free 1-page summary: email [wangguigui@correctover.com](mailto:wangguigui@correctover.com?subject=Free%20Scan%20summary%20request)
 - Learn more about the manual audit: https://correctover.com/agent-audit.html
 
 ## Links
 
 - [correctover.com](https://correctover.com) — AI Agent Runtime Assurance
 - [CCS Standard](https://correctover.com/ccs) — Conformance Specification
-- [Web Scanner](https://correctover.com/scan/) — Online version
+- [Web Scanner](https://dshcorrectover.github.io/agent-audit/scan.html) — In-browser version, no upload
 - [GitHub](https://github.com/DSHCorrectover) — Source code
 - [Conformance test vectors](https://github.com/DSHCorrectover/ccs-conformance-vectors) — 66 signed, reproducible
 - [EMILIA interoperability](https://github.com/emiliaprotocol/emilia-protocol/pull/693) — merged joint assessment
