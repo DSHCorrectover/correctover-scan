@@ -205,3 +205,10 @@ This CLI is a **free, open-source lead-generation tool** (MIT-licensed): use it 
 
 The commercial products — the hosted zero-upload scan platform, the CCS runtime verification engine, and the manual Agent Output Audit service — are proprietary and are not part of this open-source release. See [correctover.com](https://correctover.com) for those.
 
+---
+
+## Security audits
+
+We audit key-generation, signing, and runtime-verification paths for wallets, exchanges, and AI infrastructure — black-box, evidence-grade deliverables (signed receipts, RFC 3161 timestamps). Recent public work includes corrections incorporated into CVE-2026-73567's advisory and independently discovered high-severity findings in AI-lab infrastructure.
+
+wangguigui@correctover.com · https://correctover.com
