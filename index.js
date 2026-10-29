@@ -610,6 +610,11 @@ Examples:
     emit(`  ${c.green}✓ ${totalPass}${c.reset}  ${c.yellow}⚠ ${totalWarn}${c.reset}  ${c.red}✗ ${totalFail}${c.reset}  ${c.blue}ℹ ${totalInfo}${c.reset}`);
   }
 
+  // Lead-gen footer: one line, terminal + text reports
+  if (format === 'text') {
+    emit(`\n${c.dim}Need an enterprise audit or guardrails for your agent? -> https://correctover-assess.pages.dev${c.reset}`);
+  }
+
   // -o: write the report payload to a file; otherwise stream to stdout
   if (outFile) {
     const payload = machinePayload || textBuffer.join('\n');
