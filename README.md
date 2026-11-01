@@ -37,7 +37,7 @@ npx -y agent-runtime-guard   # fail-closed tool-call intercept + Ed25519 receipt
 | Runtime intercept | [agent-runtime-guard](https://github.com/DSHCorrectover/agent-runtime-guard) | Block *this* tool call; emit receipt |
 | Egress firewall | Pipelock-class | Mediate outbound network |
 | Discovery / posture | Reco / Pluto-class | Inventory agents & permissions |
-| Ecosystem data | [m[mcp-atlas-census](https://github.com/DSHCorrectover/mcp-atlas-census) | 229,827 tools with schema (CC0) |
+| Ecosystem data | [m[m[mcp-atlas-census](https://github.com/DSHCorrectover/mcp-atlas-census) | 229,827 tools with schema (CC0) |
 
 Scanners do not stop a live `curl|sh`. Runtime guards do not replace a full config audit. Use both.
 
