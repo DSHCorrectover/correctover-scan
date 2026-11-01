@@ -140,9 +140,7 @@ MIT © Correctover — free lead-gen CLI. Runtime engine and manual audit produc
 Scanner is free. Human CCS-mapped audits and private runtime deploy:
 
 | Offering | Price |
-|
-
-----------|------|
+|----------|------|
 | Standard audit | **$2,500** |
 | Deep 116-check | **$8,000+** |
 | Private deploy eval / annual | **$5,000** / **$25,000/yr** |
