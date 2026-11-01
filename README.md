@@ -5,7 +5,7 @@
 ![license](https://img.shields.io/npm/l/correctover-scan)
 [![IETF Internet-Draft](https://img.shields.io/badge/IETF-draft--correctover--ccs-blue)](https://datatracker.ietf.org/doc/draft-correctover-ccs/)
 
-> Security scanner for MCP servers and AI agents — credential exposure, SSRF, command-injection risk, missing auth. **14 checks → OWASP AISVS 1.0.** Zero install: `npx correctover-scan`.
+> **CCS-aligned** security scanner for MCP servers and AI agents ([IETF draft-correctover-ccs](https://datatracker.ietf.org/doc/draft-correctover-ccs/)). Credential exposure, SSRF, command-injection risk, missing auth. **14 checks → OWASP AISVS 1.0.** Zero install: `npx correctover-scan`.
 
 **Scan finds risk in config. Runtime blocks the call.**  
 After scanning, put enforcement on the path:
@@ -134,3 +134,15 @@ Automated scan = surface config. Manual audit = 116 checks, data-flow, 5-day PDF
 ## License
 
 MIT © Correctover — free lead-gen CLI. Runtime engine and manual audit products are separate/commercial. See https://correctover.com
+
+## Commercial (USD · overseas)
+
+Scanner is free. Human CCS-mapped audits and private runtime deploy:
+
+| Offering | Price |
+|----------|------|
+| Standard audit | **$2,500** |
+| Deep 116-check | **$8,000+** |
+| Private deploy eval / annual | **$5,000** / **$25,000/yr** |
+
+**wangguigui@correctover.com** · [GTM](https://correctover-gtm.pages.dev/) · Runtime: [agent-runtime-guard](https://github.com/DSHCorrectover/agent-runtime-guard)
