@@ -137,12 +137,10 @@ MIT © Correctover — free lead-gen CLI. Runtime engine and manual audit produc
 
 ## Commercial (USD · overseas)
 
-Scanner is free. Human CCS-mapped audits and private runtime deploy:
+Scanner is free to use.
 
-| Offering | Price |
-|----------|------|
-| Standard audit | **$2,500** |
-| Deep 116-check | **$8,000+** |
-| Private deploy eval / annual | **$5,000** / **$25,000/yr** |
+Human audit and private deploy are **scoped per engagement** — pricing is **not published** on this page (signed price card).  
+Start with a free 1-page summary: **wangguigui@correctover.com** (redacted MCP/agent config welcome).
 
-**wangguigui@correctover.com** · [GTM](https://correctover-gtm.pages.dev/) · Runtime: [agent-runtime-guard](https://github.com/DSHCorrectover/agent-runtime-guard)
+GTM: [correctover-gtm.pages.dev](https://correctover-gtm.pages.dev/)
+
