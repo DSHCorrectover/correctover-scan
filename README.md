@@ -135,14 +135,8 @@ Automated scan = surface config. Manual audit = 116 checks, data-flow, 5-day PDF
 
 MIT © Correctover — free lead-gen CLI. Runtime engine and manual audit products are separate/commercial. See https://correctover.com
 
-## Commercial (USD · overseas)
+## Commercial (overseas)
 
-Scanner is free. Human CCS-mapped audits and private runtime deploy:
-
-| Offering | Price |
-|----------|------|
-| Standard audit | **$2,500** |
-| Deep 116-check | **$8,000+** |
-| Private deploy eval / annual | **$5,000** / **$25,000/yr** |
+Scanner is free. Human CCS-mapped audits and private runtime deploy are scoped 1:1 — written quote follows scoping, not listed here. **wangguigui@correctover.com**
 
 **wangguigui@correctover.com** · [GTM](https://correctover-gtm.pages.dev/) · Runtime: [agent-runtime-guard](https://github.com/DSHCorrectover/agent-runtime-guard)
