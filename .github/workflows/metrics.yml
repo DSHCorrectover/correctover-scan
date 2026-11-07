@@ -1,0 +1,73 @@
+name: Repository Metrics Tracking
+
+on:
+  schedule:
+    # Run every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    description: 'Manually trigger metrics collection'
+
+jobs:
+  collect-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Collect repository metrics
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get repository stats
+          REPO_STATS=$(gh api repos/DSHCorrectover/correctover-scan)
+          
+          STARS=$(echo "$REPO_STATS" | jq '.stargazers_count')
+          FORKS=$(echo "$REPO_STATS" | jq '.forks_count')
+          WATCHERS=$(echo "$REPO_STATS" | jq '.watchers_count')
+          OPEN_ISSUES=$(echo "$REPO_STATS" | jq '.open_issues_count')
+          
+          # Get traffic data (requires admin token)
+          TRAFFIC=$(gh api repos/DSHCorrectover/correctover-scan/traffic/views || echo '{}')
+          CLONES=$(gh api repos/DSHCorrectover/correctover-scan/traffic/clones || echo '{}')
+          
+          # Create/update metrics file
+          cat > METRICS.md <<METRICS
+# Repository Metrics — correctover-scan
+
+*Last updated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")*
+
+## Current Stats
+
+| Metric | Count |
+|--------|-------|
+| ⭐ Stars | $STARS |
+| 🍴 Forks | $FORKS |
+| 👁️ Watchers | $WATCHERS |
+| 📋 Open Issues | $OPEN_ISSUES |
+
+## Traffic Overview
+
+- Views: See GitHub Insights for detailed analytics
+- Clones: See GitHub Insights for detailed analytics
+
+## Historical Trend
+
+Metrics are collected weekly on Mondays at 00:00 UTC.
+
+---
+
+*Automated by GitHub Actions workflow*
+METRICS
+          
+          echo "Metrics collected successfully"
+      
+      - name: Commit metrics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add METRICS.md
+          git commit -m "chore: update repository metrics [skip ci]" || echo "No changes to commit"
+          git push
