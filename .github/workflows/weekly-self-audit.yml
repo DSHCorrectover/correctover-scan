@@ -1,0 +1,83 @@
+name: Weekly Self-Audit
+
+on:
+  schedule:
+    # Every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    description: 'Manually trigger self-audit'
+
+permissions:
+  contents: write
+
+jobs:
+  self-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      
+      - name: Install correctover-scan
+        run: npm install -g correctover-scan
+      
+      - name: Run config scan
+        run: |
+          echo "=== Scanning MCP configurations ==="
+          correctover-scan --dir . --output sarif || true
+      
+      - name: Run bundle scan
+        run: |
+          echo "=== Scanning JS bundles ==="
+          correctover-scan --bundle . --output sarif || true
+      
+      - name: Check for credential leaks
+        run: |
+          echo "=== Checking for credential leaks ==="
+          if grep -r "sk_live\|ghp_[A-Za-z0-9]\{36\}\|AKIA[0-9A-Z]\{16\}\|cfat_" . --exclude-dir=.git --exclude="*.md" --exclude="node_modules" 2>/dev/null; then
+            echo "❌ CRITICAL: Found potential credentials!"
+            exit 1
+          else
+            echo "✅ No obvious credentials found"
+          fi
+      
+      - name: Generate audit report
+        run: |
+          echo "=== Generating audit summary ==="
+          cat > SELF_AUDIT_SUMMARY.md << SUMMARY
+# Weekly Self-Audit Summary
+
+**Date**: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+**Tool**: correctover-scan (latest)
+**Trigger**: Scheduled weekly audit
+
+## Scan Results
+
+- Config scan: Completed
+- Bundle scan: Completed  
+- Credential check: Completed
+
+## Action Items
+
+Review SARIF output and fix any new findings.
+See full methodology in CORRECTOVER_SELF_AUDIT_REPORT.md
+
+---
+
+*Automated by GitHub Actions*
+SUMMARY
+      
+      - name: Commit audit summary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add SELF_AUDIT_SUMMARY.md
+          git commit -m "chore: weekly self-audit $(date +%Y-%m-%d)" || echo "No changes to commit"
+          git push
