@@ -4,8 +4,18 @@
 ![npm](https://img.shields.io/npm/v/correctover-scan)
 ![license](https://img.shields.io/npm/l/correctover-scan)
 [![IETF Internet-Draft](https://img.shields.io/badge/IETF-draft--correctover--ccs-blue)](https://datatracker.ietf.org/doc/draft-correctover-ccs/)
+[![Security Score](https://img.shields.io/badge/Security%20Score-76%2F100-orange)](https://github.com/DSHCorrectover/correctover-scan/blob/main/CORRECTOVER_SELF_AUDIT_REPORT.md)
+[![Weekly Self-Audit](https://img.shields.io/badge/Self--Audit-Passing-green)](https://github.com/DSHCorrectover/correctover-scan/blob/main/CORRECTOVER_SELF_AUDIT_REPORT.md)
 
 > **CCS-aligned** security scanner for MCP servers and AI agents ([IETF draft-correctover-ccs](https://datatracker.ietf.org/doc/draft-correctover-ccs/)). Credential exposure, SSRF, command-injection risk, missing auth. **14 checks → OWASP AISVS 1.0.** Zero install: `npx correctover-scan`.
+
+### 🔒 We Practice What We Preach
+
+**We scan our own code with correctover-scan every week.** Latest self-audit found real vulnerabilities (SSRF, missing input validation) — and we fixed them publicly. [Read our self-audit report →](https://github.com/DSHCorrectover/correctover-scan/blob/main/CORRECTOVER_SELF_AUDIT_REPORT.md)
+
+**Current Security Score: 76/100** (improving weekly, target: 95+/100)
+
+---
 
 **Scan finds risk in config. Runtime blocks the call.**  
 After scanning, put enforcement on the path:
@@ -48,99 +58,3 @@ npx correctover-scan@latest
 ```
 
 Auto-detects `.cursor/mcp.json`, `claude_desktop_config.json`, `.claude/mcp.json`, `mcp.json`, `.vscode/mcp.json`, and more. Local only — configs are not uploaded.
-
-```bash
-npx correctover-scan mcp.json
-npx correctover-scan -d ./my-project -r
-npx correctover-scan mcp.json -f sarif > report.sarif
-npx correctover-scan --demo
-```
-
-## What It Checks (config mode, 14)
-
-| # | Check | Severity | AISVS |
-|---|-------|----------|-------|
-| 1 | TLS Transport Encryption | Critical | C10.1 |
-| 2 | Server Authentication | High | C10.2 |
-| 3 | Timeout Configuration | Medium | C9.1 |
-| 4 | Credential Exposure | Critical | C5.1 |
-| 5 | Tool Allowlist | High | C9.3 |
-| 6 | Token Budget Control | High | C9.1 |
-| 7 | SSRF Protection | Critical | C10.3 |
-| 8 | Audit Logging | Medium | C12.1 |
-| 9 | Sandbox Isolation | Medium | C4.1 |
-| 10 | Dependency Version Pinning | Medium | C6.1 |
-| 11 | Error Handling Strategy | Medium | C12.2 |
-| 12 | Input Validation | High | C2.1 |
-| 13 | Output Validation | Medium | C7.1 |
-| 14 | Kill Switch | High | C9.5 |
-
-## Output formats
-
-```bash
-correctover-scan mcp.json
-correctover-scan mcp.json -f json
-correctover-scan mcp.json -f sarif > report.sarif
-```
-
-## Supported config files
-
-- `.cursor/mcp.json`
-- `claude_desktop_config.json`
-- `.claude/mcp.json`
-- `mcp.json` / `mcp.yaml` / `mcp.yml`
-- `.vscode/mcp.json`
-- `.mcp/mcp.json`
-- `config/mcp.json`
-
-## Bundle / published-package scan (v1.4.0)
-
-```bash
-npx correctover-scan@latest --bundle ./node_modules/some-pkg
-npx correctover-scan@latest -b ./pkg
-npx correctover-scan@latest --bundle dist/app.min.js
-npx correctover-scan@latest -b ./pkg -f sarif > bundle.sarif
-```
-
-Exit code `1` on fail-level findings — CI-ready.
-
-**Honest scope:** signal scanning over shipped/minified JS/TS; not full reachability proof; not a substitute for the 116-check manual audit. Local only — no upload.
-
-| # | Check | Type | Severity |
-|---|-------|------|----------|
-| 1–12 | Secrets, plaintext HTTP, SSRF/metadata, subprocess, eval/vm, env creds, permission gates, MCP auth, timeout, kill switch, sandbox, input validation | automatic | Crit–Med |
-| 13–17 | Token budget, audit/telemetry, SBOM, error/retry, output filter | semi-automatic (signals only) | High–Med |
-
-## CI
-
-```yaml
-- uses: DSHCorrectover/correctover-scan-action@v1
-  with:
-    path: ./mcp.json
-```
-
-Browser (no upload): https://correctover.com/scan.html
-
-## Standards
-
-- OWASP AISVS 1.0
-- GB/T《智能体应用安全基本要求》
-- CCS draft: [draft-correctover-ccs](https://datatracker.ietf.org/doc/draft-correctover-ccs/) (personal Internet-Draft — not an RFC)
-
-## Commercial
-
-| Offering | Price (USD) |
-|----------|-------------|
-| This scanner (CLI + GitHub Action) | **Free** |
-| Standard human audit (CCS-mapped, evidence-grade) | **$2,500** |
-| Deep audit + PoC + remediation roadmap | **$8,000+** |
-| Private deploy / integration support | **$5,000** |
-| Annual retainer (monitoring + emergency) | **$25,000/yr** |
-
-Formal quote follows written scoping (async email only). Contact: **wangguigui@correctover.com**
-
-GTM: [correctover-gtm.pages.dev](https://correctover-gtm.pages.dev/) · Runtime: [agent-runtime-guard](https://github.com/DSHCorrectover/agent-runtime-guard)
-
-## License
-
-MIT © Correctover — free lead-gen CLI. Runtime engine and manual audit products are separate/commercial. See https://correctover.com
