@@ -174,11 +174,13 @@ function tally(re, text, limit = 60) {
 
 const SECRET_PATTERNS = [
   { name: 'OpenAI-style key sk-', re: /\bsk-[A-Za-z0-9_-]{20,}/ },
+  { name: 'Stripe-style live/test key sk_live_/sk_test_', re: /\bsk_(?:live|test)_[A-Za-z0-9]{10,}/ },
   { name: 'GitHub token ghp_', re: /\bghp_[A-Za-z0-9]{36}/ },
   { name: 'AWS access key AKIA', re: /\bAKIA[0-9A-Z]{16}/ },
   { name: 'Google API key AIza', re: /\bAIza[0-9A-Za-z_-]{35}/ },
   { name: 'GitHub gho_/github_pat_', re: /\b(?:gho_|github_pat_)[A-Za-z0-9_]{20,}/ },
   { name: 'Slack xox token', re: /\bxox[baprs]-[A-Za-z0-9-]{10,}/ },
+  { name: 'DB connection string with embedded password', re: /\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqps?|mssql):\/\/[^\s:\/]+:[^\s\/]{3,}@[^\s\/]+/ },
 ];
 
 // Strings that look like secrets in examples/docs/tests — not real leaks.

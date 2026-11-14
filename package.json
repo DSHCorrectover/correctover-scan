@@ -1,6 +1,6 @@
 {
   "name": "correctover-scan",
-  "version": "3.4.2",
+  "version": "3.5.0",
   "description": "Correctover Security Scanner \u2014 CCS audit for MCP configurations AND published JS bundles/npm packages. Detects hardcoded secrets, RCE, SSRF, credential hijacking against OWASP AISVS 1.0.",
   "main": "index.js",
   "bin": {
