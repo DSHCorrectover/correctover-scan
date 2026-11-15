@@ -58,3 +58,29 @@ npx correctover-scan@latest
 ```
 
 Auto-detects `.cursor/mcp.json`, `claude_desktop_config.json`, `.claude/mcp.json`, `mcp.json`, `.vscode/mcp.json`, and more. Local only — configs are not uploaded.
+
+---
+
+## Commercial
+
+**Free scanner is the top of funnel. Paid human audit + runtime enforcement is the product.**
+
+| Offering | Public anchor (USD) | Notes |
+|----------|---------------------|-------|
+| This config / bundle scanner | **Free** | Local, SARIF, no upload |
+| Runtime intercept + Ed25519 receipts ([agent-runtime-guard](https://github.com/DSHCorrectover/agent-runtime-guard)) | **Free** | Fail-closed, offline receipts |
+| Standard human audit (CCS-mapped, evidence-grade) | **$2,500** | Written scoping required |
+| Deep audit + PoC + remediation roadmap | **$8,000+** | Written scoping required |
+| Private deploy / integration support | **$5,000** | Written scoping required |
+| Annual retainer (monitoring + emergency) | **$25,000/yr** | Written scoping required |
+
+**Monetization rules (same across all Correctover surfaces):**
+- Public numbers are **anchors and lead filters only**. Formal quote always follows written scoping (async email only).
+- 1:1 commercial quotes follow the internal PRICE-CARD (higher-ticket tracks). No discount below card without explicit owner approval.
+- Zero phone. All communication async email.
+- Payment instructions appear only after signed scope / SOW.
+
+**Contact for formal quote / scoping:**  
+**wangguigui@correctover.com**
+
+Subject line suggestion: `CCS audit scoping — [your MCP / agent surface]`
