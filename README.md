@@ -1,5 +1,7 @@
 # correctover-scan
 
+[**Commercial verification engagements — USD 8,000–15,000, court-ready dossier**](https://dshcorrectover.github.io/correctover-recovery-admission/services.html) · [**Independent audit & conformance**](https://dshcorrectover.github.io/correctover-recovery-admission/services.html)
+
 [![Rekor anchored](https://img.shields.io/badge/Rekor%20anchored-logIndex%202697131671-1455A3)](https://search.sigstore.dev/?logIndex=2697131671)
 ![npm](https://img.shields.io/npm/v/correctover-scan)
 ![license](https://img.shields.io/npm/l/correctover-scan)
